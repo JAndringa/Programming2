@@ -11,6 +11,11 @@
 #include <string.h>
 #include <iomanip>
 
+/**
+ * Reads the weight and height of the user from standard input.
+ * @param weight float reference to store the user's weight.
+ * @param height float reference to store the user's height.
+ */
 void readInput(float &weight, float &height){
     std::string weightStr, heightStr;
     std::cout << "Please enter you weight in kg and press enter:" << std::endl;
@@ -22,10 +27,20 @@ void readInput(float &weight, float &height){
     height = std::stof(heightStr);
 }
 
+/**
+ * Calculates the body mass index (BMI) of the user.
+ * @param weight float weight of the user.
+ * @param height float height of the user.
+ * @return float value of the user's BMI.
+ */
 float calculateBMI(float weight, float height){
     return weight / (height * height);
 }
 
+/**
+ * Evaluates the user's BMI and prints the corresponding message.
+ * @param BMI float user's body mass index.
+ */
 void evaluateAndPrintBMI(float BMI){
     std::cout << "Your weight is ";
     if(BMI < 18.5) {
@@ -47,12 +62,15 @@ void evaluateAndPrintBMI(float BMI){
     std::cout << std::endl << std::endl;
 }
 
+/**
+ * Prints information about the BMI values.
+ */
 void printInfo(){
     std::cout << "BMI VALUES:" << std::endl;
     std::cout << std::left << std::setw(16) << "Underweight:" << std::left << std::setw(32) << "less than 18.5" << std::endl;
     std::cout << std::left << std::setw(16) << "Normal:" << std::left << std::setw(32) << "between 18.5 and 24.9" << std::endl;
     std::cout << std::left << std::setw(16) << "Overweight:" << std::left << std::setw(32) << "between 25 and 29.9" << std::endl;
-    std::cout << std::left << std::setw(16) << "Obese:" << std::left << std::setw(32) << "more than 30" << std::endl;
+    std::cout << std::left <<   std::setw(16) << "Obese:" << std::left << std::setw(32) << "more than 30" << std::endl;
 }
 
 int main(){
