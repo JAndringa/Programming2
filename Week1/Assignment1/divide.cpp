@@ -1,9 +1,9 @@
 //==============================================================
-// Filename :
+// Filename : divide.cpp
 // Authors : Jibbe Andringa S2336219
 // Group : 12
 // License : N.A.
-// Description :
+// Description : Implementation of the divide function
 //==============================================================
 
 #include "divide.hpp"

@@ -1,9 +1,9 @@
 //==============================================================
-// Filename :
+// Filename : divide.hpp
 // Authors : Jibbe Andringa S2336219
 // Group : 12
 // License : N.A.
-// Description :
+// Description : Header for the divide function
 //==============================================================
 
 #ifndef ASSIGNMENT1_DIVIDE_H
