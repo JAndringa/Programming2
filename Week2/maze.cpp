@@ -1,9 +1,12 @@
-//
-// Created by jibbe on 13-2-23.
-//
+//==============================================================
+// Filename : maze.hpp
+// Authors : Jibbe Andringa S2336219
+// Group : 12
+// License : N.A.
+// Description : Implementation of the Maze class
+//==============================================================
 
 #include "maze.hpp"
-#include <unistd.h>
 
 Maze::Maze(std::array<std::array<char, 12>, 12> map) : map{map}{
     determineStart(startingPosition);
@@ -48,7 +51,10 @@ bool Maze::traverse() {
     usleep(100000);
     system("clear");
     render();
-    if(currentPosition != startingPosition &&
+    if(tries++ > 4 && currentPosition == startingPosition){
+        return false;
+    }
+    else if(currentPosition != startingPosition &&
         (currentPosition.x == 0 || currentPosition.x == map.size() - 1 ||
         currentPosition.y == 0 || currentPosition.y == map[currentPosition.x].size() - 1)){
         return true;

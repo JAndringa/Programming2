@@ -23,8 +23,11 @@ int main(){
             {'#', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '#'},
             {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}}};
     Maze maze = Maze(map);
-    maze.render();
-    std::cout << "starting position at: " << maze.getStartingPosition().x << ", " << maze.getStartingPosition().y << std::endl;
-    maze.traverse();
+    if(maze.traverse()){
+        std::cout << "Maze solved successfully!" << std::endl;
+    }
+    else {
+        std::cout << "This maze is not solvable." << std::endl;
+    }
     return 0;
 }
