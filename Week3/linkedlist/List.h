@@ -133,7 +133,15 @@ public:
       } 
 
       std::cout << "\n\n";
-   } 
+   }
+
+   void concatenate(List *other){
+        if (!other->isEmpty()){
+            lastPtr->nextPtr = other->firstPtr;
+            lastPtr = other->lastPtr;
+        }
+        other->firstPtr = nullptr;
+    }
 
 private:
    ListNode<NODETYPE>* firstPtr{nullptr}; // pointer to first node
