@@ -12,11 +12,18 @@
 template<typename NODETYPE>
 class Tree {
 public:
-    // Output the tree row by row
+    /**
+     * Output the tree row by row
+     */
     void outputTree() {
         outputRow(rootPtr, 0);
     }
 
+    /**
+     * Search for a node with the given key in the tree.
+     * @param key The key to search for.
+     * @return A pointer to the node with the given key, or nullptr if not found.
+     */
     TreeNode<NODETYPE> *search(const NODETYPE &key) {
         return searchHelper(rootPtr, key);
     }
@@ -44,6 +51,11 @@ public:
 private:
     TreeNode<NODETYPE> *rootPtr{nullptr};
 
+    /**
+     * Output the tree row by row, starting from the given node and depth.
+     * @param node The node to start outputting from.
+     * @param depth The current depth of the node in the tree.
+     */
     void outputRow(TreeNode<NODETYPE> *node, int depth){
         if(node != nullptr){
             outputRow(node->rightPtr, depth+1);
@@ -64,6 +76,12 @@ private:
         }
     }
 
+    /**
+     * Helper function to recursively search for a node with the given key.
+     * @param node The node to start searching from.
+     * @param key The key to search for.
+     * @return A pointer to the node with the given key, or nullptr if not found.
+     */
     TreeNode<NODETYPE> *searchHelper(TreeNode<NODETYPE> *node, const NODETYPE &key) {
         if (node == nullptr) {
             return nullptr;
