@@ -4,86 +4,136 @@
 #define TREE_H
 
 #include <iostream>
+#include <unistd.h>
+#include <iomanip>
 #include "TreeNode.h"
 
 // Tree class-template definition
-template<typename NODETYPE> class Tree {
+template<typename NODETYPE>
+class Tree {
 public:
-   // insert node in Tree
-   void insertNode(const NODETYPE& value) {
-      insertNodeHelper(&rootPtr, value); 
-   } 
+    // Output the tree row by row
+    void outputTree() {
+        outputRow(rootPtr, 0);
+    }
 
-   // begin preorder traversal of Tree
-   void preOrderTraversal() const {
-      preOrderHelper(rootPtr); 
-   } 
+    TreeNode<NODETYPE> *search(const NODETYPE &key) {
+        return searchHelper(rootPtr, key);
+    }
 
-   // begin inorder traversal of Tree
-   void inOrderTraversal() const {
-      inOrderHelper(rootPtr); 
-   } 
+    // insert node in Tree
+    void insertNode(const NODETYPE &value) {
+        insertNodeHelper(&rootPtr, value);
+    }
 
-   // begin postorder traversal of Tree
-   void postOrderTraversal() const {
-      postOrderHelper(rootPtr); 
-   } 
+    // begin preorder traversal of Tree
+    void preOrderTraversal() const {
+        preOrderHelper(rootPtr);
+    }
+
+    // begin inorder traversal of Tree
+    void inOrderTraversal() const {
+        inOrderHelper(rootPtr);
+    }
+
+    // begin postorder traversal of Tree
+    void postOrderTraversal() const {
+        postOrderHelper(rootPtr);
+    }
 
 private:
-   TreeNode<NODETYPE>* rootPtr{nullptr};
+    TreeNode<NODETYPE> *rootPtr{nullptr};
 
-   // utility function called by insertNode; receives a pointer
-   // to a pointer so that the function can modify pointer's value
-   void insertNodeHelper(
-      TreeNode<NODETYPE>** ptr, const NODETYPE& value) {
-      // subtree is empty; create new TreeNode containing value
-      if (*ptr == nullptr) {
-         *ptr = new TreeNode<NODETYPE>(value);
-      }
-      else { // subtree is not empty
-             // data to insert is less than data in current node
-         if (value < (*ptr)->data) {
-            insertNodeHelper(&((*ptr)->leftPtr), value);
-         }
-         else {
-            // data to insert is greater than data in current node
-            if (value > (*ptr)->data) { 
-               insertNodeHelper(&((*ptr)->rightPtr), value);
+    void outputRow(TreeNode<NODETYPE> *node, int depth){
+        if(node != nullptr){
+            outputRow(node->rightPtr, depth+1);
+            for (int i = 0; i < depth * 8; i++){
+                std::cout << " ";
             }
-            else { // duplicate data value ignored
-               std::cout << value << " dup" << std::endl;
+            std::cout << node->data << std::endl;
+            usleep(100000);
+            outputRow(node->leftPtr, depth+1);
+
+        }
+        else{
+            for (int i = 0; i < depth * 8; i++){
+                std::cout << " ";
             }
-         } 
-      } 
-   } 
+            std::cout << "x" << std::endl;
+            usleep(50000);
+        }
+    }
 
-   // utility function to perform preorder traversal of Tree
-   void preOrderHelper(TreeNode<NODETYPE>* ptr) const {
-      if (ptr != nullptr) {
-         std::cout << ptr->data << ' '; // process node               
-         preOrderHelper(ptr->leftPtr); // traverse left subtree  
-         preOrderHelper(ptr->rightPtr); // traverse right subtree
-      } 
-   } 
+    TreeNode<NODETYPE> *searchHelper(TreeNode<NODETYPE> *node, const NODETYPE &key) {
+        if (node == nullptr) {
+            return nullptr;
+        }
+        if (node->data == key) {
+            return node;
+        }
+        if (key < node->data) {
+            return searchHelper(node->leftPtr, key);
+        }
+        if (key > node->data) {
+            return searchHelper(node->rightPtr, key);
+        }
+        std::cout << "ERROR: something went wrong" << std::endl;
+        return nullptr;
+    }
 
-   // utility function to perform inorder traversal of Tree
-   void inOrderHelper(TreeNode<NODETYPE>* ptr) const {
-      if (ptr != nullptr) {
-         inOrderHelper(ptr->leftPtr); // traverse left subtree  
-         std::cout << ptr->data << ' '; // process node              
-         inOrderHelper(ptr->rightPtr); // traverse right subtree
-      } 
-   } 
+    // utility function called by insertNode; receives a pointer
+    // to a pointer so that the function can modify pointer's value
+    void insertNodeHelper(
+            TreeNode<NODETYPE> **ptr, const NODETYPE &value) {
+        // subtree is empty; create new TreeNode containing value
+        if (*ptr == nullptr) {
+            *ptr = new TreeNode<NODETYPE>(value);
+        }
+        else { // subtree is not empty
+            // data to insert is less than data in current node
+            if (value < (*ptr)->data) {
+                insertNodeHelper(&((*ptr)->leftPtr), value);
+            }
+            else {
+                // data to insert is greater than data in current node
+                if (value > (*ptr)->data) {
+                    insertNodeHelper(&((*ptr)->rightPtr), value);
+                }
+                else { // duplicate data value ignored
+                    std::cout << value << " dup" << std::endl;
+                }
+            }
+        }
+    }
 
-   // utility function to perform postorder traversal of Tree
-   void postOrderHelper(TreeNode<NODETYPE>* ptr) const {
-      if (ptr != nullptr) { 
-         postOrderHelper(ptr->leftPtr); // traverse left subtree  
-         postOrderHelper(ptr->rightPtr); // traverse right subtree
-         std::cout << ptr->data << ' '; // process node                
-      } 
-   } 
-}; 
+    // utility function to perform preorder traversal of Tree
+    void preOrderHelper(TreeNode<NODETYPE> *ptr) const {
+        if (ptr != nullptr) {
+            std::cout << ptr->data << ' '; // process node
+            preOrderHelper(ptr->leftPtr); // traverse left subtree
+            std::cout << std::endl;
+            preOrderHelper(ptr->rightPtr); // traverse right subtree
+        }
+    }
+
+    // utility function to perform inorder traversal of Tree
+    void inOrderHelper(TreeNode<NODETYPE> *ptr) const {
+        if (ptr != nullptr) {
+            inOrderHelper(ptr->leftPtr); // traverse left subtree
+            std::cout << ptr->data << ' '; // process node
+            inOrderHelper(ptr->rightPtr); // traverse right subtree
+        }
+    }
+
+    // utility function to perform postorder traversal of Tree
+    void postOrderHelper(TreeNode<NODETYPE> *ptr) const {
+        if (ptr != nullptr) {
+            postOrderHelper(ptr->leftPtr); // traverse left subtree
+            postOrderHelper(ptr->rightPtr); // traverse right subtree
+            std::cout << ptr->data << ' '; // process node
+        }
+    }
+};
 
 #endif
 
