@@ -1,5 +1,10 @@
-// Fig. 19.22: Tree.h
-// Tree class-template definition.
+//==============================================================
+//// Filename    : Tree.h
+//// Authors     : Jibbe Andringa S2336219
+//// Group       : 12
+//// License     : N.A. or opensource license like LGPL
+//// Description : Tree class-template definition.
+////==============================================================
 #ifndef TREE_H
 #define TREE_H
 

@@ -1,5 +1,10 @@
-// Fig. 19.5: List.h
-// List class-template definition.
+//==============================================================
+// Filename    : main.cpp
+// Authors     : Jibbe Andringa S2336219
+// Group       : 12
+// License     : N.A. or opensource license like LGPL
+// Description : List class-template definition.
+//==============================================================
 #ifndef LIST_H
 #define LIST_H
 

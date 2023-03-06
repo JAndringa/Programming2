@@ -1,8 +1,8 @@
 //==============================================================
-// Filename    : 
-// Authors     : 
-// Group       :
-// License     :  N.A. or opensource license like LGPL
+// Filename    : main.cpp
+// Authors     : Jibbe Andringa S2336219
+// Group       : 12
+// License     : N.A. or opensource license like LGPL
 // Description : 
 //==============================================================
 #include <array>
