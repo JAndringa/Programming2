@@ -24,7 +24,7 @@ public:
     // draw contour
     virtual void drawContour(float threshold);
 
-    std::queue<Point> findFirstPoint(float threshold);
+    Point findFirstPoint(float threshold);
 }; // end class DrawContourMarching
 
 #endif

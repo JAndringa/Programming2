@@ -13,7 +13,8 @@
 // draw contour
 void DrawContourMarching::drawContour(float threshold) {
     // Initialize the worklist and visited list
-    std::queue<Point> worklist = findFirstPoint(threshold);
+    std::queue<Point> worklist;
+    worklist.push(findFirstPoint(threshold));
     std::vector<std::vector<bool>> visitedMatrix(ui->sizeX, std::vector<bool>(ui->sizeY, false));
 
     // Marching squares algorithm
@@ -85,18 +86,17 @@ void DrawContourMarching::drawContour(float threshold) {
 }
 
 // Helper function to find the first point on the contour
-std::queue<Point> DrawContourMarching::findFirstPoint(float threshold) {
+Point DrawContourMarching::findFirstPoint(float threshold) {
     // Scan the potential field to find the first point on the contour
-    std::queue<Point> worklist;
     bool prevPotential = false; // Keep track of whether the previous pixel was inside the contour region or not
-    for(int x = 0; x < ui->sizeX; x+=5){
-        for(int y = 0; y < ui->sizeY; y+=5) {
+    for(int x = 0; x < ui->sizeX; x++){
+        for(int y = 0; y < ui->sizeY; y++) {
             // Check if the current pixel potential value crosses the threshold value
             if (prevPotential != blob->potential(x - ui->sizeX/2, y - ui->sizeY/2) > threshold){
-                worklist.push(Point(x, y));
+                return Point(x, y);
             }
             prevPotential = blob->potential(x - ui->sizeX/2, y - ui->sizeY/2) > threshold; // Update prevPotential based on the current pixel potential value
         }
     }
-    return worklist;
+    return Point(-1, -1);
 }

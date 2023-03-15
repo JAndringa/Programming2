@@ -12,6 +12,7 @@
 #define DRAWCONTOURMARCHINGBETTER_H
 
 #include "DrawContour.h" // DrawContour class declaration
+#include <queue>
 
 // DrawContourMarchingBetter class definition
 class DrawContourMarchingBetter : public DrawContour
@@ -22,6 +23,8 @@ public:
 
     // draw contour
     virtual void drawContour(float threshold);
+
+    std::queue<Point> findFirstPoints(float threshold);
 }; // end class DrawContourMarchingBetter
 
 #endif
