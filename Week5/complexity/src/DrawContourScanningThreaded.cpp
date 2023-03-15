@@ -7,11 +7,15 @@
 //==============================================================
 
 #include "../include/DrawContourScanningThreaded.h"
+#include <thread>
 
 // draw contour
 void DrawContourScanningThreaded::drawContour(float threshold) {
+    for(int i = 0; i < ui->sizeX; i++){
+        std::thread t(searchRow(row))
+    }
+}
 
-    // YOUR CODE HERE
+void DrawContourScanningThreaded::searchRow(int row) {
 
-    ui->drawPixel(10, 0); // Dummy code only
 }
