@@ -88,14 +88,13 @@ std::queue<Point> DrawContourMarchingBetter::findFirstPoints(float threshold) {
     // Scan the potential field to find the first point on the contour
     std::queue<Point> worklist;
     bool prevPotential = false; // Keep track of whether the previous pixel was inside the contour region or not
-    for(int x = 0; x < ui->sizeX; x+=5){
-        for(int y = 0; y < ui->sizeY; y+=5) {
+    for(int x = 0; x < ui->sizeX; x+=50){
+        for(int y = 0; y < ui->sizeY; y++) {
             // Check if the current pixel potential value crosses the threshold value
             if (prevPotential != blob->potential(x - ui->sizeX/2, y - ui->sizeY/2) > threshold){
                 worklist.push(Point(x, y));
             }
             prevPotential = blob->potential(x - ui->sizeX/2, y - ui->sizeY/2) > threshold; // Update prevPotential based on the current pixel potential value
-            ui->drawPixel(x, y);
         }
     }
     return worklist;
