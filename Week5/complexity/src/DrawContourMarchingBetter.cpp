@@ -95,6 +95,7 @@ std::queue<Point> DrawContourMarchingBetter::findFirstPoints(float threshold) {
                 worklist.push(Point(x, y));
             }
             prevPotential = blob->potential(x - ui->sizeX/2, y - ui->sizeY/2) > threshold; // Update prevPotential based on the current pixel potential value
+            ui->drawPixel(x, y);
         }
     }
     return worklist;
