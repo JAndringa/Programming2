@@ -23,7 +23,7 @@ public:
     // draw contour
     virtual void drawContour(float threshold);
 
-    void searchRow(int row);
+    void searchRow(int row, float threshold);
 }; // end class DrawContourScanningThreaded
 
 #endif
